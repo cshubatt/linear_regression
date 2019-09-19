@@ -40,7 +40,7 @@ def load_hospital_data():
     pass
 
 
-def prepare_data():
+def prepare_data(df):
     """
     Prepares hospital data for regression (basically turns df into X and y).
     INPUT
@@ -48,7 +48,18 @@ def prepare_data():
     RETURNS
         data (dict) containing X design matrix and y response variable
     """
-    pass
+    n = len(df.index)
+
+    y_var = df[['average covered charges']]
+    x_var = df[['total discharges']]
+
+    # add column of constants to matrix of regressors
+    const = np.repeat(1, n)
+    x_var = const.merge(x_var, left_index = True, right_index = True)
+
+    data_dict = {y : y_var, X : x_var}
+
+    return data_dict
 
 
 def run_hospital_regression():
@@ -60,6 +71,6 @@ def run_hospital_regression():
         results (str) the statsmodels regression output
     """
     pass
- 
+
 
 ### END ###
