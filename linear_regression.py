@@ -41,7 +41,7 @@ def compare_models(X, y, beta=None):
         #results_statsmodels = pd.DataFrame(data = coeff_statsmodels.flatten()) # convert array to dataframe
 
     # sklearn
-        ols_sklearn = LinearRegression().fit(y, X) # run sklearn
+        ols_sklearn = LinearRegression(fit_intercept=False).fit(X,y) # run sklearn
         coeff_sklearn = ols_sklearn.coef_ # get the coefficients
         #results_sklearn = pd.DataFrame(data = coeff_sklearn.flatten()) # convert array to dataframe
 
