@@ -7,14 +7,17 @@ import statsmodels.api as sm
 
 
 def simulate_data():
-    """
-    Simulates data for testing linear_regression models.
-    INPUT
-        nobs (int) the number of observations in the dataset
-    RETURNS
-        data (dict) contains X, y, and beta vectors.
-    """
-    pass
+    nobs=500
+    x1 = np.random.exponential(scale=1/9000, size=nobs)
+    x2 = np.random.poisson(lam=15, size=nobs)
+    alpha = np.ones((nobs,1))
+    X = np.column_stack((alpha,x1,x2))
+    beta = np.array([[5],[1],[1]])
+    epsilon =  np.random.normal(0, 1, nobs)
+    y=np.dot(X,beta) + epsilon.reshape(nobs,1)
+    data={"y": y, "X": X, "beta": beta}
+    return(data) 
+
 
 
 def compare_models():
