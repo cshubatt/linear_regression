@@ -51,7 +51,7 @@ def prepare_data():
     pass
 
 
-def run_hospital_regression():
+def run_hospital_regression(filepath):
     """
     Loads hospital charge data and runs OLS on it.
     INPUT
@@ -59,7 +59,15 @@ def run_hospital_regression():
     RETURNS
         results (str) the statsmodels regression output
     """
-    pass
- 
+    df = load_hospital_data(filepath)
+    data = prepare_data(df)
+
+    y = data['y']
+    X = data['X']
+
+    output = sm.regression.linear_model.OLS(y,X)
+
+    return output
+
 
 ### END ###
