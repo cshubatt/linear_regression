@@ -17,7 +17,7 @@ def simulate_data():
     pass
 
 
-def compare_models():
+def compare_models(X, y, beta=None):
     """
     Compares output from different implementations of OLS.
     INPUT
@@ -30,25 +30,30 @@ def compare_models():
     """
     # data is a dictionary
     # get X and make it an array
-        X = np.ndarray(data.get('X'))
+        #X = np.ndarray(data.get('X'))
     # get y and make it an array
-        y = np.array(data.get('y'))
+        #y = np.array(data.get('y'))
 
     # statsmodels
         ols_statsmodels = sm.OLS(y, X).fit() # run sm OLS
         coeff_statsmodels = ols_statsmodels.params # this is an array
             # get the beta coefficients and they should be in a dataframe
-        results_statsmodels = pd.DataFrame(data = coeff_statsmodels.flatten()) # convert array to dataframe
+        #results_statsmodels = pd.DataFrame(data = coeff_statsmodels.flatten()) # convert array to dataframe
 
     # sklearn
         ols_sklearn = LinearRegression().fit(y, X) # run sklearn
         coeff_sklearn = ols_sklearn.coef_ # get the coefficients
-        results_sklearn = pd.DataFrame(data = coeff_sklearn.flatten()) # convert array to dataframe
+        #results_sklearn = pd.DataFrame(data = coeff_sklearn.flatten()) # convert array to dataframe
 
     # put two results into "result"?
+        results = pd.DataFrame() # start from an empty dataframe
+        results['sklearn'] = coeff_sklearn
+        results['statsmodels'] = coeff_statsmodels
 
+    if beta is not None:
+        results['truth'] = beta
 
-
+    return results
 
 def load_hospital_data():
     """
