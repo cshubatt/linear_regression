@@ -24,8 +24,29 @@ def compare_models():
         X (ndarray) the independent variables in matrix form
         y (array) the response variables vector
     RETURNS
-        results (pandas.DataFrame) of estimated beta coefficients
+     results (pandas.DataFrame) of estimated beta coefficients
+
+
     """
+    # data is a dictionary
+    # get X and make it an array
+        X = np.ndarray(data.get('X'))
+    # get y and make it an array
+        y = np.array(data.get('y'))
+
+    # statsmodels
+        ols_statsmodels = sm.OLS(y, X).fit() # run sm OLS
+        coeff_statsmodels = ols_statsmodels.params # this is an array
+            # get the beta coefficients and they should be in a dataframe
+        results_statsmodels = pd.DataFrame(data = coeff_statsmodels.flatten()) # convert array to dataframe
+
+    # sklearn
+        ols_sklearn = LinearRegression().fit(y, X) # run sklearn
+        coeff_sklearn = ols_sklearn.coef_ # get the coefficients
+        results_sklearn = pd.DataFrame(data = coeff_sklearn.flatten()) # convert array to dataframe
+
+    # put two results into "result"?
+        
     pass
 
 
@@ -60,6 +81,6 @@ def run_hospital_regression():
         results (str) the statsmodels regression output
     """
     pass
- 
+
 
 ### END ###
