@@ -46,8 +46,8 @@ def compare_models():
         results_sklearn = pd.DataFrame(data = coeff_sklearn.flatten()) # convert array to dataframe
 
     # put two results into "result"?
-        
-    pass
+
+
 
 
 def load_hospital_data():
